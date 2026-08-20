@@ -12,4 +12,4 @@ cd <ADT-ArbolBinario>
 python3 arbol.py
 ```
 
-Proyecto realizado para la materia de **Estructura de Datos 2**.
+Tarea realizada para la materia de **Estructura de Datos 2**.
