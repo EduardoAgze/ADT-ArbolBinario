@@ -1,3 +1,10 @@
+"""
+Autor:    Vargas Pantoja Luis Eduardo
+Título:   Estructura de un Arbol Binario enfocado en el juego de tres en raya.
+Version:  1.0.0
+Fecha:    19/08/2026
+"""
+
 from Nodo import Nodo
 
 
