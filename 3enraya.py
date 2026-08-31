@@ -5,20 +5,23 @@ Version:  1.0.0
 Fecha:    19/08/2026
 """
 
+from arbolbinario import ArbolBinario
 from Nodo import Nodo
 
 
-class Arbol:
-    """Representa el tablero de tres en raya como 3 mini árboles binarios."""
+class Tablero3EnRaya:
+    """Representa el tablero de tres en raya como 3 árboles binarios."""
 
     def __init__(self):
-        """Inicializa el tablero con 3 filas vacías."""
+        """Inicializa el tablero con 3 árboles (filas) vacíos."""
         self._filas = []
         for _ in range(3):
+            arbol = ArbolBinario()
             raiz = Nodo(' ')
             raiz.izquierdo = Nodo(' ')
             raiz.derecho = Nodo(' ')
-            self._filas.append(raiz)
+            arbol.raiz = raiz
+            self._filas.append(arbol)
 
     def obtener_nodo(self, fila, columna):
         """Devuelve el nodo en (fila, columna).
@@ -33,7 +36,7 @@ class Arbol:
         Returns:
             Nodo: el nodo ubicado en (fila, columna).
         """
-        raiz = self._filas[fila]
+        raiz = self._filas[fila].raiz
         if columna == 0:
             return raiz
         elif columna == 1:
@@ -42,33 +45,15 @@ class Arbol:
             return raiz.derecho
 
     def obtener_valor(self, fila, columna):
-        """Devuelve el valor guardado en (fila, columna).
-
-        Args:
-            fila: índice de la fila (0 a 2).
-            columna: índice de la columna (0 a 2).
-
-        Returns:
-            str: valor almacenado en esa casilla.
-        """
+        """Devuelve el valor guardado en (fila, columna)."""
         return self.obtener_nodo(fila, columna).valor
 
     def establecer_valor(self, fila, columna, valor):
-        """Coloca un valor en (fila, columna).
-
-        Args:
-            fila: índice de la fila (0 a 2).
-            columna: índice de la columna (0 a 2).
-            valor: valor a colocar en la casilla.
-        """
+        """Coloca un valor en (fila, columna)."""
         self.obtener_nodo(fila, columna).valor = valor
 
     def hay_ganador(self):
-        """Revisa filas, columnas y diagonales en busca de un ganador.
-
-        Returns:
-            str or None: 'X' u 'O' si hay un ganador, None si no.
-        """
+        """Revisa filas, columnas y diagonales en busca de un ganador."""
         lineas = [
             [(0, 0), (0, 1), (0, 2)],
             [(1, 0), (1, 1), (1, 2)],
@@ -95,8 +80,7 @@ class Arbol:
 
 
 if __name__ == '__main__':
-    # Ejemplo de uso
-    tablero = Arbol()
+    tablero = Tablero3EnRaya()
 
     tablero.establecer_valor(0, 1, 'X')
     tablero.establecer_valor(1, 1, 'O')
