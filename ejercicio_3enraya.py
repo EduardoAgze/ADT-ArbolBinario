@@ -6,7 +6,7 @@ Fecha:    19/08/2026
 """
 
 from arbolbinario import ArbolBinario
-from Nodo import Nodo
+from nodo import Nodo
 
 
 class Tablero3EnRaya:

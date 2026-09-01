@@ -1,4 +1,10 @@
-from Nodo import Nodo
+"""
+Autor:    Vargas Pantoja Luis Eduardo
+Título:   Clase ArbolBinario para representar un árbol binario de búsqueda (ABB) incluyendo sus recorridos y métodos de inserción y búsqueda.
+Version:  1.0.0
+Fecha:    31/08/2026
+"""
+from nodo import Nodo
 
 
 class ArbolBinario:
@@ -83,6 +89,35 @@ class ArbolBinario:
         else:
             return self._buscar_recursivo(valor, nodo.derecho)
 
+    def construir_desde_posfija(self, posfija):
+        """Construye un árbol binario a partir de una expresión en notación posfija.
+
+        Args:
+            posfija (str): Expresión en notación posfija sin espacios.
+                          Los operandos pueden ser números o variables (caracteres),
+                          y los operadores son: +, -, *, /.
+
+        """
+        if not posfija:
+            self.raiz = None
+            return
+        
+        pila_nodos = []
+
+        for caracter in posfija:
+            nodo = Nodo(caracter)
+
+            # Si es un número (operando)
+            if caracter not in "+-*/":
+                pila_nodos.append(nodo)
+            else:
+                # Si es un operador, asigna los dos últimos nodos como sus hijos
+                nodo._derecho = pila_nodos.pop()
+                nodo._izquierdo = pila_nodos.pop()
+                pila_nodos.append(nodo)
+
+        # El último nodo en la pila es la raíz principal
+        self.raiz = pila_nodos.pop()
 
 
 
@@ -93,52 +128,77 @@ class ArbolBinario:
 
 
     def InOrden(self):
-        """Recorre el árbol en orden simétrico (inorden) e imprime sus valores."""
-        self._inorden_recursivo(self.raiz)
+        """Recorre el árbol en orden simétrico (inorden).
 
-    def _inorden_recursivo(self, nodo):
-        """Recorre el subárbol en inorden e imprime sus valores.
+        Returns:
+            str: Cadena con los valores del árbol separados por espacios.
+        """
+        elementos = []
+        self._inorden_recursivo(self.raiz, elementos)
+        return " ".join(elementos)
+
+    def _inorden_recursivo(self, nodo, elementos):
+        """Recorre el subárbol en inorden y almacena sus valores.
 
         Args:
             nodo: Nodo raíz del subárbol a recorrer.
+            elementos: Lista donde se almacenan los valores.
         """
-        if nodo is None:
-            return
-        self._inorden_recursivo(nodo.izquierdo)
-        print(nodo.valor)
-        self._inorden_recursivo(nodo.derecho)
+        if nodo is not None:
+            self._inorden_recursivo(nodo.izquierdo, elementos)
+            elementos.append(str(nodo.valor))
+            self._inorden_recursivo(nodo.derecho, elementos)
+
+
 
     def PostOrden(self):
-        """Recorre el árbol en postorden e imprime sus valores."""
-        self._postorden_recursivo(self.raiz)
+        """Recorre el árbol en postorden.
 
-    def _postorden_recursivo(self, nodo):
-        """Recorre el subárbol en postorden e imprime sus valores.
+        Returns:
+            str: Cadena con los valores del árbol separados por espacios.
+        """
+        elementos = []
+        self._post_orden_recursivo(self.raiz, elementos)
+        return " ".join(elementos)
+
+    def _post_orden_recursivo(self, nodo_actual, elementos):
+        """Recorre el subárbol en postorden y almacena sus valores.
 
         Args:
-            nodo: Nodo raíz del subárbol a recorrer.
+            nodo_actual: Nodo raíz del subárbol a recorrer.
+            elementos: Lista donde se almacenan los valores.
         """
-        if nodo is None:
-            return
-        self._postorden_recursivo(nodo.izquierdo)
-        self._postorden_recursivo(nodo.derecho)
-        print(nodo.valor)
+        if nodo_actual is not None:
+            # 1. Recorrer subárbol izquierdo
+            self._post_orden_recursivo(nodo_actual.izquierdo, elementos)
+            # 2. Recorrer subárbol derecho
+            self._post_orden_recursivo(nodo_actual.derecho, elementos)
+            # 3. Visitar raíz
+            elementos.append(str(nodo_actual.valor))
+
+
 
     def PreOrden(self):
-        """Recorre el árbol en preorden e imprime sus valores."""
-        self._preorden_recursivo(self.raiz)
+        """Recorre el árbol en preorden.
 
-    def _preorden_recursivo(self, nodo):
-        """Recorre el subárbol en preorden e imprime sus valores.
+        Returns:
+            str: Cadena con los valores del árbol separados por espacios.
+        """
+        elementos = []
+        self._preorden_recursivo(self.raiz, elementos)
+        return " ".join(elementos)
+
+    def _preorden_recursivo(self, nodo, elementos):
+        """Recorre el subárbol en preorden y almacena sus valores.
 
         Args:
             nodo: Nodo raíz del subárbol a recorrer.
+            elementos: Lista donde se almacenan los valores.
         """
-        if nodo is None:
-            return
-        print(nodo.valor)
-        self._preorden_recursivo(nodo.izquierdo)
-        self._preorden_recursivo(nodo.derecho)
+        if nodo is not None:
+            elementos.append(str(nodo.valor))
+            self._preorden_recursivo(nodo.izquierdo, elementos)
+            self._preorden_recursivo(nodo.derecho, elementos)
 
 
 
@@ -152,18 +212,12 @@ class ArbolBinario:
 
     @property
     def raiz(self):
-        """Nodo raíz del árbol.
-
-        Returns:
-            Nodo or None: Referencia al nodo raíz del árbol.
-        """
+        """GETTER:
+        Obtiene la referencia al nodo raíz del árbol."""
         return self._raiz
 
     @raiz.setter
     def raiz(self, raiz):
-        """Establece el nodo raíz del árbol.
-
-        Args:
-            raiz: Nueva referencia al nodo raíz.
-        """
+        """SETTER:
+        Establece la referencia al nodo raíz del árbol."""
         self._raiz = raiz

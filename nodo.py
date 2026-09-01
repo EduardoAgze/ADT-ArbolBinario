@@ -1,3 +1,9 @@
+"""
+Autor:    Vargas Pantoja Luis Eduardo
+Título:   Clase Nodo para representar un nodo de un árbol binario incluyendo sus getters y setters.
+Version:  1.0.0
+Fecha:    31/08/2026
+"""
 class Nodo:
     """Representa un nodo de un árbol binario.
 
