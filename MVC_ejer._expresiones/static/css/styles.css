@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.resultados {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.resultados p {
+    margin: 5px 0;
+}
+
+.resultados strong {
+    display: inline-block;
+    width: 120px;
+}
