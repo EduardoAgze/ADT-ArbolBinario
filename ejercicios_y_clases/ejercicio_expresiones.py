@@ -4,7 +4,6 @@ Título:   Expresiones matematicas de infija a posfija y su representación en u
 Version:  1.0.0
 Fecha:    31/08/2026
 """
-
 from arbolbinario import ArbolBinario
 
 
