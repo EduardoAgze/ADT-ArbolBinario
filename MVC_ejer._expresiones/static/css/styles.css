@@ -46,3 +46,21 @@ button {
     display: inline-block;
     width: 120px;
 }
+
+.arbol {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 5px;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.arbol h3 {
+    margin-top: 0;
+}
+
+.grafico svg {
+    max-width: 100%;
+    height: auto;
+}

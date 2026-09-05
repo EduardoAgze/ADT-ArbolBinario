@@ -5,6 +5,7 @@ Version:  1.0.0
 Fecha:    31/08/2026
 """
 
+from graphviz import Digraph
 from model.arbolbinario import ArbolBinario
 from model.nodo import Nodo
 
@@ -17,6 +18,27 @@ class ArbolBinario_Expresiones(ArbolBinario):
 
     def __init__(self):
         super().__init__()
+
+    def grafo(self):
+        """Devuelve un objeto Digraph de Graphviz con la estructura del árbol.
+
+        Returns:
+            Digraph: Grafo dirigido con los nodos y las aristas del árbol binario.
+        """
+        dot = Digraph()
+
+        def visitar(nodo, padre_id=None):
+            if nodo is None:
+                return
+            id_actual = str(id(nodo))
+            dot.node(id_actual, str(nodo.valor))
+            if padre_id:
+                dot.edge(padre_id, id_actual)
+            visitar(nodo.izquierdo, id_actual)
+            visitar(nodo.derecho, id_actual)
+
+        visitar(self.raiz)
+        return dot
 
     def construir_desde_posfija(self, posfija):
         if not posfija:

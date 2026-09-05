@@ -29,6 +29,18 @@
         <p><strong>Posfija:</strong> {{ posfija | join(' ') }}</p>
         <p><strong>Resultado:</strong> {{ resultado }}</p>
     </div>
+
+    <div class="arbol">
+        <h3>Estructura del Árbol Binario</h3>
+        <div class="grafico">{{ grafico_svg | safe }}</div>
+    </div>
+
+    <div class="resultados">
+        <h3>Recorridos del Árbol</h3>
+        <p><strong>Preorden:</strong> {{ preorden }}</p>
+        <p><strong>Inorden:</strong> {{ inorden }}</p>
+        <p><strong>Postorden:</strong> {{ postorden }}</p>
+    </div>
     {% endif %}
 </body>
 </html>

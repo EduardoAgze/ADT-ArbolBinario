@@ -24,13 +24,20 @@ def convertir():
     arbol.construir_desde_posfija(posfija)
 
     # 3. Obtener los recorridos del árbol.
+    preorden = arbol.PreOrden()
+    inorden = arbol.InOrden()
     postorden = arbol.PostOrden()
- 
+
+    # 4. Generar la representación gráfica del árbol en formato SVG.
+    grafico_svg = arbol.grafo().pipe(format="svg").decode("utf-8")
 
     flash("Expresión convertida")
 
     return render_template("index.html",
                            expresion=expresion,
                            posfija=posfija,
+                           preorden=preorden,
+                           inorden=inorden,
                            postorden=postorden,
+                           grafico_svg=grafico_svg,
                            resultado=arbol.evaluar())
